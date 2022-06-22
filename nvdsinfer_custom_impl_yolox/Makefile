@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 #CUDA_VER?=
 CUDA_VER=10.2
 ifeq ($(CUDA_VER),)
@@ -23,7 +22,9 @@ CC:= g++
 NVCC:=/usr/local/cuda-$(CUDA_VER)/bin/nvcc
 
 CFLAGS:= -Wall -std=c++11 -shared -fPIC -Wno-error=deprecated-declarations
-CFLAGS+= -I../../includes -I/usr/local/cuda-$(CUDA_VER)/include -I/home/nvidia/data/zhangbo/library/opencv-4.5.1/include/opencv4 -I/usr/lib/gcc/x86_64-linux-gnu/7/include/ 
+CFLAGS+= -I/opt/nvidia/deepstream/deepstream/sources/includes -I/usr/local/cuda/include -I/usr/include/opencv4 -I/usr/lib/gcc/aarch64-linux-gnu/7/include
+CFLAGS+= -DWITH_OPENCV
+PKGS:= opencv4
 CXXFLAGS:= -fopenmp
 
 LIBS:= -lnvinfer_plugin -lnvinfer -lnvparsers -L/usr/local/cuda-$(CUDA_VER)/lib64 -lcudart -lcublas -lstdc++fs -L/home/nvidia/data/zhangbo/library/opencv-4.5.1/lib -lopencv_core
@@ -36,6 +37,8 @@ TARGET_LIB:= libnvdsinfer_custom_impl_yolox.so
 
 TARGET_OBJS:= $(SRCFILES:.cpp=.o)
 TARGET_OBJS:= $(TARGET_OBJS:.cu=.o)
+
+#find_package(OpenCV REQUIRED)
 
 all: $(TARGET_LIB)
 
