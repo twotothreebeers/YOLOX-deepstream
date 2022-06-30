@@ -31,7 +31,7 @@ LIBS:= -lnvinfer_plugin -lnvinfer -lnvparsers -L/usr/local/cuda-$(CUDA_VER)/lib6
 LFLAGS:= -shared -Wl,--start-group $(LIBS) -Wl,--end-group -fopenmp
 
 INCS:= $(wildcard *.h)
-SRCFILES:= nvdsparsebbox_yolox.cpp 
+SRCFILES:= yolox.cpp 
 
 TARGET_LIB:= libnvdsinfer_custom_impl_yolox.so
 
